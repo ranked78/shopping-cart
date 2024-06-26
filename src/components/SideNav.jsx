@@ -1,9 +1,7 @@
-// src/SideNav.jsx
-
-import React, { useState } from 'react';
+import React, { useState, forwardRef, useImperativeHandle } from 'react';
 import '../css/SideNav.css'; // Create a CSS file for styling the sidebar
 
-const SideNav = () => {
+const SideNav = forwardRef((props, ref) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const openNav = () => {
@@ -14,10 +12,16 @@ const SideNav = () => {
     setIsOpen(false);
   };
 
+  // Expose openNav and closeNav functions via ref
+  useImperativeHandle(ref, () => ({
+    openNav,
+    closeNav
+  }));
+
   return (
     <div>
       <div id="mySidenav" className={`sidenav ${isOpen ? 'open' : ''}`}>
-        <a href="javascript:void(0)" className="closebtn" onClick={closeNav}>
+        <a href="#" className="closebtn" onClick={closeNav}>
           &times;
         </a>
         <a href="#">About</a>
@@ -25,17 +29,14 @@ const SideNav = () => {
         <a href="#">Clients</a>
         <a href="#">Contact</a>
       </div>
-
-      <h2>Animated Sidenav Example</h2>
-      <p>Click on the element below to open the side navigation menu.</p>
       <span
         style={{ fontSize: '30px', cursor: 'pointer' }}
         onClick={openNav}
       >
-        &#9776; open
+        &#9776;
       </span>
     </div>
   );
-};
+});
 
 export default SideNav;
