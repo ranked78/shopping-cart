@@ -14,8 +14,7 @@ const SideNav = forwardRef((props, ref) => {
 
   // Expose openNav and closeNav functions via ref
   useImperativeHandle(ref, () => ({
-    openNav,
-    closeNav
+    openNav
   }));
 
   return (
